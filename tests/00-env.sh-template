@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
 
 export ibroadcast_login_token=''
+
+# ==============================================
+# Dropbox session cookie is only required
+# to download files that have restricted access
+# ==============================================
+export dropbox_session_cookie='gvc='

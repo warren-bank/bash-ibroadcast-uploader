@@ -12,13 +12,13 @@ debugger=''
 
 app_name='iBroadcast bash uploader script'
 app_useragent='ibroadcast-bash-uploader'
-app_version='0.1.0'
+app_version='0.1.1'
 
 user_id=''
 user_token=''
 
 print_usage() {
-  echo 'usage: ibroadcast-uploader.sh <login_token> <filename> <URL>'
+  echo 'usage: ibroadcast-uploader.sh <login_token> <filename> <URL> [<cookies>]'
 }
 
 do_login() {
@@ -58,11 +58,12 @@ do_login() {
 do_upload() {
   local filename="$1"
   local url="$2"
+  local cookies="$3"
 
   echo "uploading \"${filename}\"..."
   echo ''
 
-  curl -s "$url" | curl \
+  curl -L -H "Cookie: ${cookies}" -s "$url" | curl \
     -X POST \
     -F "file=@-;filename=${filename}" \
     -F "file_path=${filename}" \
@@ -79,6 +80,7 @@ main() {
   local login_token="$1"
   local filename="$2"
   local url="$3"
+  local cookies="$4"
 
   if [ -z "$login_token" ];then
     echo 'missing required input parameter: login_token'
@@ -103,7 +105,7 @@ main() {
     exit 1
   fi
 
-  do_upload "$filename" "$url"
+  do_upload "$filename" "$url" "$cookies"
 }
 
-main "$1" "$2" "$3"
+main "$1" "$2" "$3" "$4"

@@ -18,7 +18,7 @@ The bash script in this repo:
 #### Usage:
 
 ```bash
-ibroadcast-uploader.sh <login_token> <filename> <URL>
+ibroadcast-uploader.sh <login_token> <filename> <URL> [<cookies>]
 ```
 
 where the `login_token` is obtained, as follows:<br>
